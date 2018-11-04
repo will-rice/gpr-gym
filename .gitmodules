@@ -1,0 +1,3 @@
+[submodule "gprMax"]
+	path = gprMax
+	url = https://github.com/gprMax/gprMax.git
