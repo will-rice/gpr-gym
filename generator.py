@@ -50,9 +50,9 @@ class Generator:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        'in_dir', help='name of the input directory')
+        '--in_dir', help='name of the input directory')
     parser.add_argument(
-        'out_dir', help='name of output directory')
+        '--out_dir', help='name of output directory')
     args = parser.parse_args()
 
     Generator(args.out_dir, args.in_dir)
