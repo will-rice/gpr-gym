@@ -4,6 +4,7 @@ from glob import glob
 
 import matplotlib.pyplot as plt
 import numpy as np
+from tqdm import tqdm
 
 from gprMax.gprMax import api
 from tools.outputfiles_merge import merge_files
@@ -19,19 +20,14 @@ class Generator:
         self.in_file_paths = glob(in_dir)
         self.rx_number = 1
         self.rx_component = 'Ez'
-        self.n_scans = 100
+        self.n_scans = 200
 
         for path in self.in_file_paths:
             self._create_ascan(path)
             self._merge_ascan(path)
-            output_data, dt = self._prepare_bscan(path)
-            output_data = output_data - np.mean(output_data, axis=1, keepdims=True)
-            output_data = output_data * (
-                np.arange(
-                    output_data.shape[0])/output_data.shape[0]).reshape(
-                        output_data.shape[0], 1)
+            outputdata, dt = self._prepare_bscan(path)
             save_img(path,
-                     output_data,
+                     outputdata,
                      dt,
                      self.rx_number,
                      self.rx_component,
@@ -50,10 +46,9 @@ class Generator:
     def _prepare_bscan(self, path):
         filename, _ = os.path.splitext(path)
         filename = filename + '_merged.out'
-        return get_output_data(
-            filename,
-            self.rx_number,
-            self.rx_component)
+        return get_output_data(filename,
+                               self.rx_number,
+                               self.rx_component)
 
 
 if __name__ == '__main__':
