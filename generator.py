@@ -22,7 +22,7 @@ class Generator:
         self.rx_component = 'Ez'
         self.n_scans = 200
 
-        for path in self.in_file_paths:
+        for path in tqdm(self.in_file_paths):
             self._create_ascan(path)
             self._merge_ascan(path)
             outputdata, dt = self._prepare_bscan(path)
