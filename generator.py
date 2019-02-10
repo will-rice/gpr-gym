@@ -1,8 +1,10 @@
+import matplotlib
+matplotlib.use('agg')
+
 import os
 import argparse
 from glob import glob
 
-import matplotlib.pyplot as plt
 import numpy as np
 from tqdm import tqdm
 
@@ -14,13 +16,14 @@ from utils import save_img
 
 
 class Generator:
-    def __init__(self, in_dir, out_dir):
+    def __init__(self, n_scans, in_dir, out_dir):
         self.in_dir = in_dir
         self.out_dir = out_dir
         self.in_file_paths = glob(in_dir)
+        self.in_file_paths.sort()
         self.rx_number = 1
         self.rx_component = 'Ez'
-        self.n_scans = 200
+        self.n_scans = n_scans
 
         for path in tqdm(self.in_file_paths):
             self._create_ascan(path)
@@ -59,4 +62,4 @@ if __name__ == '__main__':
         '--out_dir', help='name of output directory')
     args = parser.parse_args()
 
-    Generator(args.out_dir, args.in_dir)
+    Generator(200, args.out_dir, args.in_dir)

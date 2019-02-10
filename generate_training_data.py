@@ -10,8 +10,10 @@ import time
 from gprMax.input_cmd_funcs import command
 import matplotlib.pyplot as plt
 
-X = 1
-Y = 1
+X = 1.0
+Y = 1.0
+CYLINDER_X=0.33
+CYLINDER_Y=0.33
 
 
 def blockPrint():
@@ -25,8 +27,7 @@ diameters = np.arange(start=0.01,
                       stop=0.1,
                       step=0.01)
 
-start = time.time()
-for i in tqdm(range(10)):
+for i in tqdm(range(1)):
 
     blockPrint()
     for pipe_material in pipe_materials:
@@ -96,18 +97,18 @@ for i in tqdm(range(10)):
                         'material', 3, 0,
                         1, 0, 'pvc')
                     cylinder = command(
-                        'cylinder', 0.33, 0.33, 0, 0.33,
+                        'cylinder', CYLINDER_X, 0.33, 0, CYLINDER_X,
                         0.33, 0.002, diameter, 'pvc', 'y')
                 elif pipe_material is 'pec':
                     cylinder = command(
-                        'cylinder', 0.33, 0.33, 0, 0.33,
+                        'cylinder', CYLINDER_X, 0.33, 0, CYLINDER_X,
                         0.33, 0.002, diameter, 'pec', 'y')
                 else:
                     concrete =  pvc = command(
-                        'material', 9, 0,
-                        0.01, 0, 'concrete')
+                        'material', 6, 0,
+                        1, 0, 'concrete')
                     cylinder = command(
-                        'cylinder', 0.33, 0.33, 0, 0.33,
+                        'cylinder', CYLINDER_X, 0.33, 0, CYLINDER_X,
                         0.33, 0.002, diameter, 'concrete', 'y')
 
                 rx = command(
@@ -137,11 +138,12 @@ for i in tqdm(range(10)):
 
                 with open(
                     os.path.join(
-                        'input-files',
-                        'cylinder_Bscan_2D_{}_{}_{}.in'.format(
-                            i,
-                            pipe_material,
-                            np.round(diameter, decimals=4))), 'w') as f:
+                    'input-files',
+                    'cylinder_Bscan_2D_{}_{}_{}_{}.in'.format(
+                    i,
+                    pipe_material,
+                    np.round(diameter, decimals=4),
+                    ground)), 'w') as f:
                     f.write(domain+'\n')
                     f.write(dx_dy_dz+'\n')
                     f.write(time_window+'\n')
@@ -172,7 +174,4 @@ for i in tqdm(range(10)):
                     #f.write(geometry_view+'\n')
                     f.write(message)
 
-Generator('input-files/*.in', 'output-files')
-end = time.time()
-with open('time.txt', 'w') as f:
-    f.write((end-start))
+Generator(n_scans=300, in_dir='input-files/*.in', out_dir='output-files/')
