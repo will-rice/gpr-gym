@@ -1,20 +1,19 @@
-import matplotlib
-matplotlib.use('agg')
-
-from generator import Generator
-from tqdm import tqdm
 import os
 import sys
+
+
 import numpy as np
-import time
+from tqdm import tqdm
+
+
+from generator import Generator
 from gprMax.input_cmd_funcs import command
-import matplotlib.pyplot as plt
 
 X = 0.5
 Y = 0.5
 Z = 0.002
-CYLINDER_X=0.15
-CYLINDER_Y=0.080
+CYLINDER_X = 0.15
+CYLINDER_Y = 0.080
 
 
 def blockPrint():
@@ -64,23 +63,20 @@ for i in tqdm(range(20)):
                         'fractal_box', 0, 0, 0, X,
                         0.75 * Y, Z, 1.5, 1, 1, 1, 50,
                         'my_soil', 'my_soil_box', seed)
-                   
 
-                    
-
-                    if pipe_material is 'pvc':
+                    if pipe_material == 'pvc':
                         pvc = command(
                             'material', 3, 0,
                             1, 0, 'pvc')
                         cylinder = command(
                             'cylinder', CYLINDER_X, CYLINDER_Y, 0, CYLINDER_X,
                             CYLINDER_Y, Z, diameter, 'pvc', 'y')
-                    elif pipe_material is 'pec':
+                    elif pipe_material == 'pec':
                         cylinder = command(
                             'cylinder', CYLINDER_X, CYLINDER_Y, 0, CYLINDER_X,
                             CYLINDER_Y, Z, diameter, 'pec', 'y')
                     else:
-                        concrete =  pvc = command(
+                        concrete = pvc = command(
                             'material', 6, 0,
                             1, 0, 'concrete')
                         cylinder = command(
@@ -106,25 +102,27 @@ for i in tqdm(range(20)):
 
                     message = command('messages', 'n')
 
-                    with open(os.path.join('input-files',
-                                           'cylinder_Bscan_2D_{}_{}_{}_{}.in'.format(
-                        i,
-                        pipe_material,
-                        np.round(diameter, decimals=4),
-                        np.round(sand, decimals=4))), 'w') as f:
+                    with open(os.path.join(
+                        'input-files',
+                        'cylinder_Bscan_2D_{}_{}_{}_{}.in'.format(
+                            i,
+                            pipe_material,
+                            np.round(diameter, decimals=4),
+                            np.round(sand, decimals=4))), 'w') as f:
+
                         f.write(domain+'\n')
                         f.write(dx_dy_dz+'\n')
                         f.write(time_window+'\n')
                         f.write(soil_peplinski+'\n')
                         f.write(box+'\n')
 
-                        if pipe_material is 'pvc':
+                        if pipe_material == 'pvc':
                             f.write(pvc+'\n')
-                        elif pipe_material is 'concrete':
+                        elif pipe_material == 'concrete':
                             f.write(concrete+'\n')
                         else:
                             pass
-                        
+
                         f.write(cylinder+'\n')
                         f.write(rx+'\n')
                         f.write(src_steps+'\n')
