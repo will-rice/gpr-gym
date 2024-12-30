@@ -33,20 +33,13 @@ This citation is recommended by the university
     Rice, William, "Applying generative adversarial networks to intelligent subsurface imaging and identification" (2019). Masters Theses and Doctoral Dissertations.
     <https://scholar.utc.edu/theses/595>
 
-However, here is the arxiv bibtex if you prefer.
+However, here is the bibtex if you prefer.
 
-    @ARTICLE{2019arXiv190513321R,
-           author = {{Rice}, William},
-            title = "{Applying Generative Adversarial Networks to Intelligent Subsurface Imaging and Identification}",
-          journal = {arXiv e-prints},
-         keywords = {Electrical Engineering and Systems Science - Image and Video Processing, Computer Science - Machine Learning},
-             year = "2019",
-            month = "May",
-              eid = {arXiv:1905.13321},
-            pages = {arXiv:1905.13321},
-    archivePrefix = {arXiv},
-           eprint = {1905.13321},
-     primaryClass = {eess.IV},
-           adsurl = {<https://ui.adsabs.harvard.edu/abs/2019arXiv190513321R}>,
-          adsnote = {Provided by the SAO/NASA Astrophysics Data System}
-    }
+    @mastersthesis{rice2019applying,
+  author       = {William Rice},
+  title        = {Applying Generative Adversarial Networks to Intelligent Subsurface Imaging and Identification},
+  year         = {2019},
+  school       = {University of Tennessee at Chattanooga},
+  type         = {Masters Thesis},
+  url          = {https://scholar.utc.edu/theses/595}
+}
