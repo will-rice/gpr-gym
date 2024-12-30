@@ -35,6 +35,7 @@ This citation is recommended by the university
 
 However, here is the bibtex if you prefer.
 
+```
     @mastersthesis{rice2019applying,
   author       = {William Rice},
   title        = {Applying Generative Adversarial Networks to Intelligent Subsurface Imaging and Identification},
@@ -43,3 +44,4 @@ However, here is the bibtex if you prefer.
   type         = {Masters Thesis},
   url          = {https://scholar.utc.edu/theses/595}
 }
+```
